@@ -56,6 +56,12 @@ const PlayerSubmissionForm = () => {
           {
             // Put your form inputs here... We've put in one below as an example
           }
+      The <input name='adj' placeholder='adjective 1' type='text' value={formFields.adj} onChange={onInputChange}/>
+          <input name='noun' placeholder='noun 1' type='text' value={formFields.noun} onChange={onInputChange}/>
+          <input name='adverb' placeholder='adverb' type='text' value={formFields.adverb} onChange={onInputChange}/>
+          <input name='verb' placeholder='verb' type='text' value={formFields.verb} onChange={onInputChange}/>
+          <input name='adj2' placeholder='adjective 2' type='text' value={formFields.adj2} onChange={onInputChange}/>
+          <input name='noun2' placeholder='noun 2' type='text' value={formFields.noun2} onChange={onInputChange}/>
 
         </div>
 
