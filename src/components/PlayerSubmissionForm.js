@@ -14,10 +14,23 @@ const PlayerSubmissionForm = () => {
     noun2: '',
   });
 
+
+  const onInputChange = (event) => {
+    // console.log(`Changing field ${ event.target.name } to ${ event.target.value }`);
+    // // Duplicate formFields into new object
+    const newFormFields = {
+      ...formFields,
+    }
+  
+    newFormFields[event.target.name] = event.target.value;
+    setFormFields(newFormFields);
+  }
+
+
   return (
-    <div className="PlayerSubmissionForm"
+    <div className="PlayerSubmissionForm" 
     >
-      <h3>Player Submission Form for Player #{ }</h3>
+      <h3>Player Submission Form for Player #{}</h3>
 
       <form className="PlayerSubmissionForm__form" >
 
