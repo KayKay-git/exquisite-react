@@ -14,6 +14,7 @@ const PlayerSubmissionForm = () => {
     noun2: '',
   });
 
+  const [player, setPlayer] = useState(1);
 
   const onInputChange = (event) => {
     // console.log(`Changing field ${ event.target.name } to ${ event.target.value }`);
@@ -26,6 +27,22 @@ const PlayerSubmissionForm = () => {
     setFormFields(newFormFields);
   }
 
+  const onFormSubmit = (event) => {
+    // prevent the browser from trying to submit the form.
+    event.preventDefault();
+  
+    // ... We need to change form state.
+    setFormFields({
+      adj: '',
+      noun: '', 
+      adverb: '', 
+      verb: '', 
+      adj2: '',
+      noun2: '',
+    });
+    
+    setPlayer(player + 1);
+  };
 
   return (
     <div className="PlayerSubmissionForm" 
