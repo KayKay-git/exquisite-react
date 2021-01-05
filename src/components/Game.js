@@ -5,6 +5,10 @@ import FinalPoem from './FinalPoem';
 import RecentSubmission from './RecentSubmission';
 
 const Game = () => {
+
+  const [currentFields, setFields] = useState([])
+  const [poemSubmitted, setPoemSubmitted] = useState(false)
+
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
       return field.placeholder;
@@ -12,6 +16,19 @@ const Game = () => {
       return field;
     }
   }).join(' ');
+
+   // pass to PlayerSub form, when player submits line this is the callback function that will be called 
+  const onSubmitLine = (fields) => {
+    const newFieldList = [...currentFields];
+    newFieldList.push(fields);
+    setFields(newFieldList);
+  }
+
+  const revealPoem = () => {
+    if (currentFields.length >= 1) {
+      setPoemSubmitted(true);
+    }
+  }
 
   return (
     <div className="Game">
@@ -27,9 +44,9 @@ const Game = () => {
 
       <RecentSubmission />
 
-      <PlayerSubmissionForm />
+      <PlayerSubmissionForm onSubmitLine= {onSubmitLine}/>
 
-      <FinalPoem />
+      <FinalPoem  currentFields={currentFields} poemSubmitted={poemSubmitted} revealPoem={revealPoem} />
 
     </div>
   );

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './PlayerSubmissionForm.css';
 
-const PlayerSubmissionForm = () => {
+const PlayerSubmissionForm = (props) => {
 
   const [formFields, setFormFields] = useState({
     adj: '',
@@ -18,20 +18,22 @@ const PlayerSubmissionForm = () => {
 
   const onInputChange = (event) => {
     // console.log(`Changing field ${ event.target.name } to ${ event.target.value }`);
-    // // Duplicate formFields into new object
+    // Duplicate formFields into new object
     const newFormFields = {
       ...formFields,
     }
   
     newFormFields[event.target.name] = event.target.value;
     setFormFields(newFormFields);
+    setPlayer(player + 1);
   }
 
   const onFormSubmit = (event) => {
     // prevent the browser from trying to submit the form.
     event.preventDefault();
-  
-    // ... We need to change form state.
+
+    props.onSubmitLine(formFields);
+    
     setFormFields({
       adj: '',
       noun: '', 
@@ -41,7 +43,6 @@ const PlayerSubmissionForm = () => {
       noun2: '',
     });
     
-    setPlayer(player + 1);
   };
 
   return (
@@ -52,11 +53,8 @@ const PlayerSubmissionForm = () => {
       <form className="PlayerSubmissionForm__form" >
 
         <div className="PlayerSubmissionForm__poem-inputs">
-
-          {
-            // Put your form inputs here... We've put in one below as an example
-          }
-      The <input name='adj' placeholder='adjective 1' type='text' value={formFields.adj} onChange={onInputChange}/>
+          
+          <input name='adj' placeholder='adjective 1' type='text' value={formFields.adj} onChange={onInputChange}/>
           <input name='noun' placeholder='noun 1' type='text' value={formFields.noun} onChange={onInputChange}/>
           <input name='adverb' placeholder='adverb' type='text' value={formFields.adverb} onChange={onInputChange}/>
           <input name='verb' placeholder='verb' type='text' value={formFields.verb} onChange={onInputChange}/>
