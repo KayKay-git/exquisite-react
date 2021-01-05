@@ -13,12 +13,12 @@ const RecentSubmission = (props) => {
   );
 
   if ( props.showRecent === false) {
-  return ('');
+  return (null);
   } else {
     return (
     <div className="RecentSubmission">
     <h3>The Most Recent Submission</h3>
-    <p className="RecentSubmission__submission">{recent}</p>
+    <p className="RecentSubmission__submission">{recent[recent.length-1]}</p>
   </div>
     )
   }

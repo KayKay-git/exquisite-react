@@ -40,9 +40,6 @@ const Game = () => {
     }
   }
 
-console.log(currentFields[currentFields.length-1])
-console.log(currentFields)
-
   return (
     <div className="Game">
       <h2>Game</h2>
