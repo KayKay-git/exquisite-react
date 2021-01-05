@@ -8,6 +8,9 @@ const Game = () => {
 
   const [currentFields, setFields] = useState([])
   const [poemSubmitted, setPoemSubmitted] = useState(false)
+  const [showRecent, setShowRecent] = useState(true)
+  const [showPlayerForm, setShowPlayerForm] = useState(true);
+
 
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
@@ -22,13 +25,21 @@ const Game = () => {
     const newFieldList = [...currentFields];
     newFieldList.push(fields);
     setFields(newFieldList);
+
+    const recentField = []
+    recentField.push(fields);
+
+    setShowRecent(recentField);
   }
 
   const revealPoem = () => {
     if (currentFields.length >= 1) {
       setPoemSubmitted(true);
+      setShowRecent(false);
+      setShowPlayerForm(false);
     }
   }
+
 
   return (
     <div className="Game">
@@ -41,10 +52,9 @@ const Game = () => {
       <p className="Game__format-example">
         { exampleFormat }
       </p>
+      <RecentSubmission recentSubmission = {currentFields} showRecent={showRecent}/>
 
-      <RecentSubmission />
-
-      <PlayerSubmissionForm onSubmitLine= {onSubmitLine}/>
+      <PlayerSubmissionForm onSubmitLine= {onSubmitLine} showPlayerForm = {showPlayerForm}/>
 
       <FinalPoem  currentFields={currentFields} poemSubmitted={poemSubmitted} revealPoem={revealPoem} />
 
