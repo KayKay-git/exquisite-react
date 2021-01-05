@@ -40,6 +40,8 @@ const Game = () => {
     }
   }
 
+console.log(currentFields[currentFields.length-1])
+console.log(currentFields)
 
   return (
     <div className="Game">
@@ -52,7 +54,7 @@ const Game = () => {
       <p className="Game__format-example">
         { exampleFormat }
       </p>
-      <RecentSubmission recentSubmission = {currentFields} showRecent={showRecent}/>
+      <RecentSubmission recentSubmission = {currentFields} showRecent={showRecent} />
 
       <PlayerSubmissionForm onSubmitLine= {onSubmitLine} showPlayerForm = {showPlayerForm}/>
 
@@ -61,7 +63,6 @@ const Game = () => {
     </div>
   );
 }
-
 
 const FIELDS = [
   'The',
