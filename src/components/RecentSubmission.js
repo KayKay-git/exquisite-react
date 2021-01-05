@@ -12,7 +12,7 @@ const RecentSubmission = (props) => {
 
   );
 
-  if ( props.showRecent === false) {
+  if ( props.showRecent === false || props.recentSubmission.length < 1) {
   return (null);
   } else {
     return (
