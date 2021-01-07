@@ -6,44 +6,53 @@ import './PlayerSubmissionForm.css';
 const PlayerSubmissionForm = (props) => {
 
   const [formFields, setFormFields] = useState({
-    adj: '',
-    noun: '', 
-    adverb: '', 
-    verb: '', 
+    adj1: '',
+    noun1: '',
+    adv: '',
+    verb: '',
     adj2: '',
     noun2: '',
   });
 
-  const [player, setPlayer] = useState(1);
+  const [player, setPlayer] = useState(props.index);
 
   const onInputChange = (event) => {
-    // console.log(`Changing field ${ event.target.name } to ${ event.target.value }`);
-    // Duplicate formFields into new object
-    const newFormFields = {
-      ...formFields,
-    }
-  
+
+    const newFormFields = {...formFields}
+
     newFormFields[event.target.name] = event.target.value;
+
     setFormFields(newFormFields);
-    setPlayer(player + 1);
+  }
+
+  const sentenceFormat = () => {
+    const fields = props.fields.map((field) => {
+      if (field.key) {
+        return formFields[`${field.key}`]
+      } else {
+        return field
+      }
+    })
+    return fields.join(' ')
   }
 
   const onFormSubmit = (event) => {
     // prevent the browser from trying to submit the form.
     event.preventDefault();
-
-    props.onSubmitLine(formFields);
-
+    props.sendSubmission(sentenceFormat());   // callback fn
     setFormFields({
-      adj: '',
-      noun: '', 
-      adverb: '', 
-      verb: '', 
+      adj1: '',
+      noun1: '',
+      adv: '',
+      verb: '',
       adj2: '',
       noun2: '',
-    });
-    
-  };
+    });  // reset after submit 
+
+    setPlayer(player + 1);
+
+  }
+
 const revealFormButton = ''
 const revealForm = 
     <div className="PlayerSubmissionForm" onSubmit={onFormSubmit}
@@ -53,13 +62,24 @@ const revealForm =
       <form className="PlayerSubmissionForm__form" >
     
         <div className="PlayerSubmissionForm__poem-inputs">
-      
-          <input name='adj' placeholder='adjective 1' type='text' value={formFields.adj} onChange={onInputChange}/>
-          <input name='noun' placeholder='noun 1' type='text' value={formFields.noun} onChange={onInputChange}/>
-          <input name='adverb' placeholder='adverb' type='text' value={formFields.adverb} onChange={onInputChange}/>
-          <input name='verb' placeholder='verb' type='text' value={formFields.verb} onChange={onInputChange}/>
-          <input name='adj2' placeholder='adjective 2' type='text' value={formFields.adj2} onChange={onInputChange}/>
-          <input name='noun2' placeholder='noun 2' type='text' value={formFields.noun2} onChange={onInputChange}/>
+          
+          {props.fields.map((field) => {
+            if (field.key) {
+              return (
+                <input 
+                  key={field.key}
+                  name={field.key}
+                  placeholder={field.placeholder}
+                  type="text" 
+                  value={formFields[field.key] || ''}
+                  onChange={onInputChange} 
+                  className={ formFields[field.key] === '' ? 'PlayerSubmissionFormt__input--invalid'  : 'PlayerSubmissionForm__input--invalid::placeholder'}
+                />
+              )
+          } else {
+            return field;
+          };
+        })}
 
         </div>
 

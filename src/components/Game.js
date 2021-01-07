@@ -6,12 +6,6 @@ import RecentSubmission from './RecentSubmission';
 
 const Game = () => {
 
-  const [currentFields, setFields] = useState([])
-  const [poemSubmitted, setPoemSubmitted] = useState(false)
-  const [showRecent, setShowRecent] = useState(true)
-  const [showPlayerForm, setShowPlayerForm] = useState(true);
-
-
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
       return field.placeholder;
@@ -20,24 +14,24 @@ const Game = () => {
     }
   }).join(' ');
 
+  const [currentFields, setFields] = useState([])
+  const [poemSubmitted, setPoemSubmitted] = useState(false)
+  const [showRecent, setShowRecent] = useState(true)
+  const [showPlayerForm, setShowPlayerForm] = useState(true);
+
    // pass to PlayerSub form, when player submits line this is the callback function that will be called 
   const onSubmitLine = (fields) => {
-    const newFieldList = [...currentFields];
-    newFieldList.push(fields);
+    const newFieldList = [...currentFields, fields];
     setFields(newFieldList);
-
-    const recentField = []
-    recentField.push(fields);
-
-    setShowRecent(recentField);
   }
 
   const revealPoem = () => {
-    if (currentFields.length >= 1) {
+    if (currentFields.length >= 0) {
       setPoemSubmitted(true);
       setShowRecent(false);
       setShowPlayerForm(false);
     }
+    
   }
 
   return (
@@ -51,11 +45,11 @@ const Game = () => {
       <p className="Game__format-example">
         { exampleFormat }
       </p>
-      <RecentSubmission recentSubmission = {currentFields} showRecent={showRecent} />
+      <RecentSubmission submission = {currentFields} showRecent={showRecent} />
 
-      <PlayerSubmissionForm onSubmitLine= {onSubmitLine} showPlayerForm = {showPlayerForm}/>
+      <PlayerSubmissionForm fields = {FIELDS} sendSubmission= {onSubmitLine} showPlayerForm = {showPlayerForm} index = {1}/>
 
-      <FinalPoem  currentFields={currentFields} poemSubmitted={poemSubmitted} revealPoem={revealPoem} />
+      <FinalPoem  submissions ={currentFields} isSubmitted={poemSubmitted} revealPoem={revealPoem} />
 
     </div>
   );

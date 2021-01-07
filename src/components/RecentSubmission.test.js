@@ -7,10 +7,10 @@ import RecentSubmission from './RecentSubmission';
 describe('Wave 2:  RecentSubmission', () => {
   test('It renders with a submission and shows the text', () => {
     // Act
-    render(<RecentSubmission submission={'This is a submission'} />);
+    render(<RecentSubmission submission={'The Most Recent Submission'} />);
 
     // Assert
-    const textContainer = screen.getByText(/This is a submission/i);
+    const textContainer = screen.getByText(/The Most Recent Submission/i);
     expect(textContainer).toBeInTheDocument();
   });
 });

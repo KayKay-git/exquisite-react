@@ -3,30 +3,29 @@ import PropTypes from 'prop-types';
 import './FinalPoem.css';
 
 const FinalPoem = (props) => {
-  const completePoem = props.currentFields.map((field, i) => {
-    const { adj, noun, adverb, verb, adj2, noun2 } = field
-
-    const line = `The ${adj} ${noun} ${adverb} ${verb} the ${adj2} ${noun2}.` 
-      return <p key={i}> {line}</p>;
-    }
-
-  );
-
-  const onSubmitLineButtonClick = () => {
+  
+  const submittedPoem = props.submissions.map((line, i) => {
+    console.log(line)
+    return(
+    <p key={i}>{line}</p>
+    )
+  })
+  const onRevealPoemButtonClick = () => {
     props.revealPoem();
   }
 
-  const revealedPoem =
+  const revealPoem =
   <section className="FinalPoem__poem">
     <h3>Final Poem</h3>
-    { completePoem }
+    {submittedPoem}
   </section>;
 
   const revealPoemButton =
   <div className="FinalPoem__reveal-btn-container">
-      <input type="button" value="We are finished: Reveal the Poem" className="FinalPoem__reveal-btn" onClick={onSubmitLineButtonClick } />
+      <input type="button" value="We are finished: Reveal the Poem" className="FinalPoem__reveal-btn" onClick={onRevealPoemButtonClick } />
   </div>
-const content = props.poemSubmitted ? revealedPoem : revealPoemButton;
+
+const content = props.isSubmitted ? revealPoem : revealPoemButton;
 
 return (
   <div className="FinalPoem">
