@@ -4,7 +4,6 @@ import './RecentSubmission.css';
 
 const RecentSubmission = (props) => {
 
-  console.log(props.submission)
   if ( props.showRecent === false || props.submission <= 0 ) {
   return (null);
   } else {
