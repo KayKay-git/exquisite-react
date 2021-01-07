@@ -5,7 +5,6 @@ import './FinalPoem.css';
 const FinalPoem = (props) => {
   
   const submittedPoem = props.submissions.map((line, i) => {
-    console.log(line)
     return(
     <p key={i}>{line}</p>
     )
